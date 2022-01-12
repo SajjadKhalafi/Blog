@@ -1,16 +1,23 @@
+<?php
+if (isset($_POST['submit'])){
+    $search =  $_POST['search'];
+}
+?>
 <div class="col-md-4">
 
     <!-- Blog Search Well -->
     <div class="well">
-        <h4>Blog Search</h4>
-        <div class="input-group">
-            <input type="text" class="form-control">
-            <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <span class="glyphicon glyphicon-search"></span>
+        <form action="" method="post">
+            <h4>Blog Search</h4>
+            <div class="input-group">
+                    <input name="search" type="text" class="form-control">
+                    <span class="input-group-btn">
+                        <button name="submit" class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
                         </button>
-                        </span>
-        </div>
+                    </span>
+            </div>
+        </form>
         <!-- /.input-group -->
     </div>
 

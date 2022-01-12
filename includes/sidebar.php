@@ -1,6 +1,17 @@
 <?php
 if (isset($_POST['submit'])){
     $search =  $_POST['search'];
+    $query = "SELECT * FROM posts WHERE post_tags LIKE '%$search%'";
+    $search_query = mysqli_query($connection , $query);
+
+    $count = mysqli_num_rows($search_query);
+
+    if (!$count){
+        echo "<h1>NO Result</h1>";
+    }
+    else{
+        echo "<h1>Some Result</h1>";
+    }
 }
 ?>
 <div class="col-md-4">

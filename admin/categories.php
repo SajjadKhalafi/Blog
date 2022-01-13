@@ -27,6 +27,28 @@
                         </div>
                     </form>
                 </div>
+                <div class="col-xs-6">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <th>Id</th>
+                            <th>Category Title</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Football National Teams</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Basketball National Teams</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Handball National Teams</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <!-- /.row -->
 

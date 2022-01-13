@@ -1,8 +1,8 @@
-<?php include "includes/header.php"; ?>
+<?php include "includes/admin_header.php"; ?>
     <div id="wrapper">
 
     <!-- Navigation -->
-    <?php include "includes/navigation.php";?>
+    <?php include "includes/admin_navigation.php";?>
 
     <div id="page-wrapper">
 
@@ -30,22 +30,24 @@
                 <div class="col-xs-6">
                     <table class="table table-bordered table-hover">
                         <thead>
-                            <th>Id</th>
-                            <th>Category Title</th>
+                            <tr>
+                                <th>Id</th>
+                                <th>Category Title</th>
+                            </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Football National Teams</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Basketball National Teams</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Handball National Teams</td>
-                            </tr>
+                            <?php
+                            $query = "SELECT * FROM categories";
+                            $select_categories = mysqli_query($connection , $query);
+                            while($row = mysqli_fetch_assoc($select_categories)){
+                                $cat_id = $row['cat_id'];
+                                $cat_title = $row['cat_title'];
+                                echo "<tr>
+                                        <td>{$cat_id}</td>
+                                        <td>{$cat_title}</td>
+                                    </tr>";
+                            }
+                            ?>
                         </tbody>
                     </table>
                 </div>
@@ -58,4 +60,4 @@
     </div>
     <!-- /#page-wrapper -->
 
-<?php include "includes/footer.php"; ?>
+<?php include "includes/admin_footer.php"; ?>

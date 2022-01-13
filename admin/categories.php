@@ -27,6 +27,7 @@
                             $query = "INSERT INTO categories(`cat_title`) ";
                             $query .= "VALUE('{$category_title}')";
                             $create_category = mysqli_query($connection , $query);
+                            header("Location: categories.php");
                             if (!$create_category) {
                                 die("something wrong!" . mysqli_error($connection));
                             }
@@ -61,10 +62,20 @@
                             echo "<tr>
                                         <td>{$cat_id}</td>
                                         <td>{$cat_title}</td>
+                                        <td><a href='categories.php?delete={$cat_id}' class='btn btn-sm btn-danger'>Delete</a></td>
                                     </tr>";
                         }
                         ?>
                         </tbody>
+
+                        <?php
+                        if (isset($_GET['delete'])){
+                            $getCatID = $_GET['delete'];
+                            $query = "DELETE FROM categories WHERE cat_id = {$getCatID}";
+                            $deleteCategory = mysqli_query($connection , $query);
+                            header("Location: categories.php");
+                        }
+                        ?>
                     </table>
                 </div>
             </div>

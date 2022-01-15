@@ -1,5 +1,5 @@
 <?php
-if (isset($_POST['create_post'])){
+if (isset($_POST['create_post'])) {
     $post_title = $_POST['post_title'];
     $post_category_id = $_POST['post_category_id'];
     $post_author = $_POST['post_author'];
@@ -13,7 +13,12 @@ if (isset($_POST['create_post'])){
     $post_date = date("d-m-y");
     $post_comment_count = 0;
 
-    move_uploaded_file($image_tmp_name , "../images/$image_name");
+    move_uploaded_file($image_tmp_name, "../images/$image_name");
+
+    $query = "INSERT INTO posts(post_category_id , post_title , post_author , post_date , post_image , post_content , post_tags , post_comment_count , post_status)";
+    $query .= " VALUES ($post_category_id , '$post_title' , '$post_author' , now() , '$image_name' , '$post_content' , '$post_tags' , $post_comment_count , '$post_status')";
+    $create_post = mysqli_query($connection, $query);
+    confirmQuery($create_post);
 }
 ?>
 <form action="" method="post" enctype="multipart/form-data">

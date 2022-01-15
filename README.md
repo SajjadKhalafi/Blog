@@ -1,1 +1,1 @@
-# Blog
+# CMS project from Udemy course

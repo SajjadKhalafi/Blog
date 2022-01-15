@@ -36,6 +36,7 @@
                                       <td>{$post_tags}</td>
                                       <td>{$post_comments_count}</td>
                                       <td>{$post_date}</td>
+                                      <td><a href='posts.php?source=edit_post&p_id=$post_id' class='btn btn-primary btn-sm'>Edit</a></td>
                                       <td><a href='posts.php?delete=$post_id' class='btn btn-danger btn-sm'>Delete</a></td>
                                   </tr>";
     }

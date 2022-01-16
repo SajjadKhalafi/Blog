@@ -47,17 +47,17 @@
         echo "<td>{$comment_date}</td>";
         echo "<td><a href='posts.php?source=edit_post&p_id='>Approve</a></td>";
         echo "<td><a href='posts.php?delete='>UnApprove</a></td>";
-        echo "<td><a href='posts.php?delete=' class='btn btn-danger btn-sm'>Delete</a></td>";
+        echo "<td><a href='comments.php?delete=$comment_id' class='btn btn-danger btn-sm'>Delete</a></td>";
         echo "</tr>";
     }
     ?>
 
     <?php
     if (isset($_GET['delete'])) {
-        $post_id = $_GET['delete'];
-        $query = "DELETE FROM posts WHERE post_id = $post_id";
-        $deletePost = mysqli_query($connection, $query);
-        header("Location: posts.php");
+        $comment_id = $_GET['delete'];
+        $query = "DELETE FROM comments WHERE comment_id = $comment_id";
+        $deleteComment = mysqli_query($connection, $query);
+        header("Location: comments.php");
     }
     ?>
     </tbody>

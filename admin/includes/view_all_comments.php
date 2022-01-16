@@ -15,7 +15,7 @@
     </thead>
     <tbody>
     <?php
-    $query = "SELECT * FROM comments";
+    $query = "SELECT * FROM comments ORDER BY comment_id DESC";
     $select_comments = mysqli_query($connection, $query);
     while ($row = mysqli_fetch_assoc($select_comments)) {
         $comment_id = $row['comment_id'];
@@ -56,14 +56,14 @@
 
     if (isset($_GET['approve'])) {
         $comment_id = $_GET['approve'];
-        $query = "UPDATE comments SET comment_status = 'Approve' WHERE comment_id = $comment_id";
+        $query = "UPDATE comments SET comment_status = 'Approved' WHERE comment_id = $comment_id";
         $deleteComment = mysqli_query($connection, $query);
         header("Location: comments.php");
     }
 
     if (isset($_GET['unApprove'])) {
         $comment_id = $_GET['unApprove'];
-        $query = "UPDATE comments SET comment_status = 'unApprove' WHERE comment_id = $comment_id";
+        $query = "UPDATE comments SET comment_status = 'unApproved' WHERE comment_id = $comment_id";
         $deleteComment = mysqli_query($connection, $query);
         header("Location: comments.php");
     }

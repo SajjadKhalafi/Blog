@@ -63,6 +63,10 @@
 
                 $query = "INSERT INTO comments (comment_post_id , comment_author , comment_email , comment_content , comment_status , comment_date)";
                 $query .= " VALUES ({$comment_post_id} , '{$comment_author}' , '{$comment_email}' , '{$comment_content}' ,  'Unapproved' , now())";
+                $create_comment_query = mysqli_query($connection , $query);
+                if (!$create_comment_query){
+                    die("QUERY FAILED" . mysqli_error($connection));
+                }
             }
             ?>
             <div class="well">

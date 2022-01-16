@@ -40,14 +40,14 @@
                         <a href="post.php?p_id=<?= $post_id ?>"><?= $post_title ?></a>
                     </h2>
                     <p class="lead">
-                        by <a href="index.php"><?= $post_author ?></a>
+                        by <a href="#"><?= $post_author ?></a>
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span> Posted on <?= $post_date ?></p>
                     <hr>
                     <img class="img-responsive" src="images/<?= $post_image ?>" alt="">
                     <hr>
                     <p><?= $post_content ?></p>
-                    <a class="btn btn-primary" href="#">Read More <span
+                    <a class="btn btn-primary" href="post.php?p_id=<?= $post_id ?>">Read More <span
                                 class="glyphicon glyphicon-chevron-right"></span></a>
 
                     <hr>

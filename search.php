@@ -15,7 +15,10 @@
             <?php
             if (isset($_POST['submit'])) {
                 $search = $_POST['search'];
-                $query = "SELECT * FROM posts WHERE post_tags LIKE '%$search%' ORDER BY post_id DESC";
+                $query = "SELECT * FROM posts ";
+                $query .= "WHERE post_tags LIKE '%$search%' ";
+                $query .= "AND post_status = 'published' ";
+                $query .= " ORDER BY post_id DESC";
                 $search_query = mysqli_query($connection, $query);
 
                 $count = mysqli_num_rows($search_query);

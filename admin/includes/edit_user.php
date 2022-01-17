@@ -1,6 +1,16 @@
 <?php
 if (isset($_GET['edit_user'])){
-    $the_user_id = $_GET['edit_user'];
+    $user_id = $_GET['edit_user'];
+    $query = "SELECT * FROM users WHERE user_id = $user_id";
+    $select_query = mysqli_query($connection , $query);
+    while ($row = mysqli_fetch_assoc($select_query)){
+        $user_firstname = $row['user_firstname'];
+        $user_lastname = $row['user_lastname'];
+        $user_role = $row['user_role'];
+        $username = $row['username'];
+        $user_email = $row['user_email'];
+        $user_password = $row['user_password'];
+    }
 }
 if (isset($_POST['edit_user'])) {
     $user_firstname = $_POST['user_firstname'];
@@ -26,11 +36,11 @@ if (isset($_POST['edit_user'])) {
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="">Firstname</label>
-        <input type="text" class="form-control" name="user_firstname">
+        <input type="text" class="form-control" name="user_firstname" value="<?= $user_firstname ?>">
     </div>
     <div class="form-group">
         <label for="">Lastname</label>
-        <input type="text" class="form-control" name="user_lastname">
+        <input type="text" class="form-control" name="user_lastname" value="<?= $user_lastname ?>">
     </div>
     <div class="form-group">
         <select name="user_role" id="">
@@ -42,7 +52,7 @@ if (isset($_POST['edit_user'])) {
 
     <div class="form-group">
         <label for="">Username</label>
-        <input type="text" class="form-control" name="username">
+        <input type="text" class="form-control" name="username" value="<?= $username ?>">
     </div>
     <!--    <div class="form-group">-->
     <!--        <label for="">Post Author</label>-->
@@ -50,11 +60,11 @@ if (isset($_POST['edit_user'])) {
     <!--    </div>-->
     <div class="form-group">
         <label for="">Email</label>
-        <input type="email" class="form-control" name="user_email">
+        <input type="email" class="form-control" name="user_email" value="<?= $user_email?>">
     </div>
     <div class="form-group">
         <label for="">Password</label>
-        <input type="password" name="user_password" class="form-control">
+        <input type="password" class="form-control" name="user_password" value="<?= $user_password ?>">
     </div>
     <div class="form-group">
         <input type="submit" class="btn btn-primary" name="edit_user" value="Update User">

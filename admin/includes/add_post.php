@@ -19,6 +19,7 @@ if (isset($_POST['create_post'])) {
     $query .= " VALUES ($post_category_id , '$post_title' , '$post_author' , now() , '$image_name' , '$post_content' , '$post_tags' , '$post_status')";
     $create_post = mysqli_query($connection, $query);
     confirmQuery($create_post);
+    header("Location: posts.php");
 }
 ?>
 <form action="" method="post" enctype="multipart/form-data">

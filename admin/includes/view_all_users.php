@@ -31,8 +31,17 @@
         echo "<td>{$user_email}</td>";
         echo "<td>{$user_role}</td>";
         echo "<td><a href='posts.php?source=edit_post&p_id=' class='btn btn-primary btn-sm'>Edit</a></td>";
-        echo "<td><a href='posts.php?delete=' class='btn btn-danger btn-sm'>Delete</a></td>";
+        echo "<td><a href='users.php?delete=$user_id' class='btn btn-danger btn-sm'>Delete</a></td>";
         echo "</tr>";
+    }
+    ?>
+
+    <?php
+    if (isset($_GET['delete'])) {
+        $user_id = $_GET['delete'];
+        $query = "DELETE FROM users WHERE user_id = $user_id";
+        $delete_user_query = mysqli_query($connection, $query);
+        header("Location: users.php");
     }
     ?>
     </tbody>

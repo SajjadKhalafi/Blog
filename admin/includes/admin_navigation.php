@@ -60,7 +60,7 @@
                 </ul>
             </li>
             <li>
-                <a href="blank-page.php"><i class="fa fa-fw fa-file"></i> Profile</a>
+                <a href="profile.php"><i class="fa fa-fw fa-file"></i> Profile</a>
             </li>
         </ul>
     </div>

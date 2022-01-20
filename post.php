@@ -1,4 +1,5 @@
 <?php include "includes/db.php"; ?>
+<?php session_start(); ?>
 <!--Header-->
 <?php include "includes/header.php"; ?>
 <!-- Navigation -->

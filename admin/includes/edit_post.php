@@ -104,7 +104,7 @@ if (isset($_POST['update_post'])){
     </div>
     <div class="form-group">
         <label for="">Post Content</label>
-        <textarea class="form-control" name="post_content" id="" cols="30" rows="10"><?= $post_content ?></textarea>
+        <textarea class="form-control" name="post_content" id="body" cols="30" rows="10"><?= $post_content ?></textarea>
     </div>
     <div class="form-group">
         <input type="submit" class="btn btn-primary" name="update_post" value="Update Post">

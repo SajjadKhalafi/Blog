@@ -45,7 +45,9 @@
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span> Posted on <?= $post_date ?></p>
                     <hr>
-                    <img class="img-responsive" src="images/<?= $post_image ?>" alt="">
+                    <a href="post.php?p_id=<?= $post_id ?>">
+                        <img class="img-responsive" src="images/<?= $post_image ?>" alt="">
+                    </a>
                     <hr>
                     <p><?= $post_content ?></p>
                     <a class="btn btn-primary" href="post.php?p_id=<?= $post_id ?>">Read More <span

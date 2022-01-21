@@ -17,6 +17,7 @@
     <table class="table table-bordered table-hover">
         <thead>
         <tr>
+            <th><input type="checkbox" id="selectAllBoxes"></th>
             <th>Id</th>
             <th>Author</th>
             <th>Title</th>
@@ -46,6 +47,7 @@
             $post_date = $row['post_date'];
 
             echo "<tr>";
+            echo "<td><input type='checkbox' class='checkboxes' name='checkboxArray[]' value='{$post_id}'></td>";
             echo "<td>{$post_id}</td>";
             echo "<td>{$post_author}</td>";
             echo "<td>{$post_title}</td>";

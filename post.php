@@ -60,19 +60,25 @@
                 $comment_email = $_POST['comment_email'];
                 $comment_content = $_POST['comment_content'];
 
-                $query = "INSERT INTO comments (comment_post_id , comment_author , comment_email , comment_content , comment_status , comment_date)";
-                $query .= " VALUES ({$comment_post_id} , '{$comment_author}' , '{$comment_email}' , '{$comment_content}' ,  'Unapproved' , now())";
-                $create_comment_query = mysqli_query($connection , $query);
-                if (!$create_comment_query){
-                    die("QUERY FAILED" . mysqli_error($connection));
+                if (!empty($comment_author) && !empty($comment_email) && !empty($comment_content)){
+                    $query = "INSERT INTO comments (comment_post_id , comment_author , comment_email , comment_content , comment_status , comment_date)";
+                    $query .= " VALUES ({$comment_post_id} , '{$comment_author}' , '{$comment_email}' , '{$comment_content}' ,  'Unapproved' , now())";
+                    $create_comment_query = mysqli_query($connection , $query);
+                    if (!$create_comment_query){
+                        die("QUERY FAILED" . mysqli_error($connection));
+                    }
+                    $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
+                    $query .= "WHERE post_id = $post_id";
+                    $update_post_comment_query = mysqli_query($connection , $query);
+                    if (!$update_post_comment_query){
+                        die("QUERY FAILED" . mysqli_error($connection));
+                    }
+                    header("Location: post.php?p_id=$post_id");
+                }else{
+                    echo "<script>alert('Fields cannot be empty')</script>";
                 }
-                $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
-                $query .= "WHERE post_id = $post_id";
-                $update_post_comment_query = mysqli_query($connection , $query);
-                if (!$update_post_comment_query){
-                    die("QUERY FAILED" . mysqli_error($connection));
-                }
-                header("Location: post.php?p_id=$post_id");
+
+
             }
             ?>
             <div class="well">

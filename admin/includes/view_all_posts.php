@@ -95,7 +95,7 @@ if (isset($_POST['checkboxArray'])) {
             echo "<td>{$post_date}</td>";
             echo "<td><a href='../post.php?p_id=$post_id' class='btn btn-info btn-sm'>View Post</a></td>";
             echo "<td><a href='posts.php?source=edit_post&p_id=$post_id' class='btn btn-primary btn-sm'>Edit</a></td>";
-            echo "<td><a href='posts.php?delete=$post_id' class='btn btn-danger btn-sm'>Delete</a></td>";
+            echo "<td><a href='posts.php?delete=$post_id' onclick=\"return confirm('Are You Sure?') \" class='btn btn-danger btn-sm'>Delete</a></td>";
             echo "</tr>";
         }
         ?>

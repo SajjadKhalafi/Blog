@@ -17,12 +17,12 @@ if (isset($_POST['submit'])) {
         if (!$select_randSalt_query){
             die("QUERY FAILED " . mysqli_error($connection));
         }
-
         $row = mysqli_fetch_array($select_randSalt_query);
         $salt = $row['randSalt'];
+        $password = crypt($password, $salt);
 
         $query = "INSERT INTO users (username , user_email , user_password , user_role) ";
-        $query .= "VALUES ('$username' , '$email' , '$password' , 'subscriber' ) ";
+        $query .= "VALUES ('{$username}' , '{$email}' , '{$password}' , 'subscriber' ) ";
         $insert_user_query = mysqli_query($connection , $query);
         if (!$insert_user_query){
             die("QUERY FAILED " . mysqli_error($connection) . ' ' . mysqli_errno($connection));

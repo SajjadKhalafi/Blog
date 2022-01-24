@@ -94,6 +94,7 @@ if (isset($_POST['checkboxArray'])) {
             $post_tags = $row['post_tags'];
             $post_comments_count = $row['post_comment_count'];
             $post_date = $row['post_date'];
+            $post_view_count = $row['post_view_count'];
 
             echo "<tr>";
             ?>
@@ -119,6 +120,7 @@ if (isset($_POST['checkboxArray'])) {
             echo "<td><a href='../post.php?p_id=$post_id' class='btn btn-info btn-sm'>View Post</a></td>";
             echo "<td><a href='posts.php?source=edit_post&p_id=$post_id' class='btn btn-primary btn-sm'>Edit</a></td>";
             echo "<td><a href='posts.php?delete=$post_id' onclick=\"return confirm('Are You Sure?') \" class='btn btn-danger btn-sm'>Delete</a></td>";
+            echo "<td>$post_view_count</td>";
             echo "</tr>";
         }
         ?>

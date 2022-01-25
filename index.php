@@ -14,6 +14,14 @@
         <div class="col-md-8">
             <?php
 
+            $page = $_GET['page'] ?? "";
+            if ($page == "" || $page == 1){
+                $page_1 = 0;
+            }else{
+                $page_1 = ($page * 5) - 5;
+            }
+
+
             $select_post_query = "SELECT * FROM posts";
             $post_query_count = mysqli_query($connection , $select_post_query);
             $count = mysqli_num_rows($post_query_count);
@@ -21,7 +29,7 @@
 
             $query = "SELECT * FROM posts ";
             $query .= "WHERE post_status = 'published' ";
-            $query .= "ORDER BY post_id DESC";
+            $query .= "ORDER BY post_id DESC LIMIT $page_1 , 5";
             $select_all_posts_query = mysqli_query($connection, $query);
             if (mysqli_num_rows($select_all_posts_query) === 0)
                 echo "<h1 class='text-center'>No Post Sorry</h1>";
@@ -76,7 +84,7 @@
     <hr>
     <ul class="pager">
         <?php for ($i = 1; $i <= $count; $i++): ?>
-            <li><a href="index.php?pager=<?= $i; ?>"><?= $i; ?></a></li>
+            <li><a href="index.php?page=<?= $i; ?>"><?= $i; ?></a></li>
         <?php endfor; ?>
     </ul>
 

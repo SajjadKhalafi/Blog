@@ -1,4 +1,18 @@
 <?php include "includes/admin_header.php"; ?>
+
+<?php
+$session = session_id();
+$time = time();
+
+$query = "SELECT * FROM users_online WHERE session = '$session'";
+$select_online = mysqli_query($connection , $query);
+$count = mysqli_num_rows($select_online);
+
+if ($count == NULL){
+    $query = "INSERT INTO users_online (session , time) VALUES ('$session' , $time)";
+    $send_query = mysqli_query($connection , $query);
+}
+?>
     <div id="wrapper">
 
     <!-- Navigation -->

@@ -13,12 +13,12 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <?php
-
+            $per_page = 5;
             $page = $_GET['page'] ?? "";
             if ($page == "" || $page == 1){
                 $page_1 = 0;
             }else{
-                $page_1 = ($page * 5) - 5;
+                $page_1 = ($page * $per_page) - $per_page;
             }
 
 
@@ -29,7 +29,7 @@
 
             $query = "SELECT * FROM posts ";
             $query .= "WHERE post_status = 'published' ";
-            $query .= "ORDER BY post_id DESC LIMIT $page_1 , 5";
+            $query .= "ORDER BY post_id DESC LIMIT $page_1 , $per_page";
             $select_all_posts_query = mysqli_query($connection, $query);
             if (mysqli_num_rows($select_all_posts_query) === 0)
                 echo "<h1 class='text-center'>No Post Sorry</h1>";

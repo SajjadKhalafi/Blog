@@ -13,6 +13,12 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <?php
+
+            $select_post_query = "SELECT * FROM posts";
+            $post_query_count = mysqli_query($connection , $select_post_query);
+            $count = mysqli_num_rows($post_query_count);
+            $count = ceil($count / 5);
+
             $query = "SELECT * FROM posts ";
             $query .= "WHERE post_status = 'published' ";
             $query .= "ORDER BY post_id DESC";
@@ -54,7 +60,6 @@
                                 class="glyphicon glyphicon-chevron-right"></span></a>
 
                     <hr>
-
                     <?php
                 }
             }
@@ -69,6 +74,11 @@
     <!-- /.row -->
 
     <hr>
+    <ul class="pager">
+        <?php for ($i = 1; $i <= $count; $i++): ?>
+            <li><a href="index.php?pager=<?= $i; ?>"><?= $i; ?></a></li>
+        <?php endfor; ?>
+    </ul>
 
     <!-- Footer -->
     <?php include "includes/footer.php"; ?>

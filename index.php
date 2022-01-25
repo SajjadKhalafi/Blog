@@ -14,7 +14,7 @@
         <div class="col-md-8">
             <?php
             $per_page = 5;
-            $page = $_GET['page'] ?? "";
+            $page = $_GET['page'] ?? 1;
             if ($page == "" || $page == 1){
                 $page_1 = 0;
             }else{
@@ -84,7 +84,11 @@
     <hr>
     <ul class="pager">
         <?php for ($i = 1; $i <= $count; $i++): ?>
-            <li><a href="index.php?page=<?= $i; ?>"><?= $i; ?></a></li>
+            <?php if ($i == $page): ?>
+                <li><a class="active_link" href="index.php?page=<?= $i; ?>"><?= $i; ?></a></li>
+            <?php else: ?>
+                <li><a href="index.php?page=<?= $i; ?>"><?= $i; ?></a></li>
+            <?php endif;?>
         <?php endfor; ?>
     </ul>
 

@@ -12,6 +12,10 @@
 
         <!-- Blog Entries Column -->
         <div class="col-md-8">
+            <h1 class="page-header">
+                Search for
+                "<?= $_POST['search']; ?>"
+            </h1>
             <?php
             if (isset($_POST['submit'])) {
                 $search = $_POST['search'];
@@ -24,7 +28,7 @@
                 $count = mysqli_num_rows($search_query);
 
                 if (!$count) {
-                    echo "<h1>NO Result</h1>";
+                    echo "<h2 class='text-center'>NO Result</h2>";
                 } else {
                     while ($row = mysqli_fetch_assoc($search_query)) {
                         $post_id = $row['post_id'];
@@ -34,10 +38,7 @@
                         $post_image = $row['post_image'];
                         $post_content = substr($row['post_content'], 0, 400) . "...";
                         ?>
-                        <h1 class="page-header">
-                            Page Heading
-                            <small>Secondary Text</small>
-                        </h1>
+
 
                         <!-- First Blog Post -->
                         <h2>

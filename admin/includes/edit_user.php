@@ -1,9 +1,9 @@
 <?php
-if (isset($_GET['edit_user'])){
+if (isset($_GET['edit_user'])) {
     $user_id = $_GET['edit_user'];
     $query = "SELECT * FROM users WHERE user_id = $user_id";
-    $select_query = mysqli_query($connection , $query);
-    while ($row = mysqli_fetch_assoc($select_query)){
+    $select_query = mysqli_query($connection, $query);
+    while ($row = mysqli_fetch_assoc($select_query)) {
         $user_firstname = $row['user_firstname'];
         $user_lastname = $row['user_lastname'];
         $user_role = $row['user_role'];
@@ -17,34 +17,32 @@ if (isset($_POST['edit_user'])) {
     $user_lastname = $_POST['user_lastname'];
     $user_role = $_POST['user_role'];
     $username = $_POST['username'];
-
-//    $image_name = $_FILES['image']['name'];
-//    $image_tmp_name = $_FILES['image']['tmp_name'];
-
     $user_email = $_POST['user_email'];
     $user_password = $_POST['user_password'];
-//    $post_date = date("d-m-y");
 
-    $query = "SELECT randSalt FROM users";
-    $select_randSalt_query = mysqli_query($connection , $query);
-    if (!$select_randSalt_query){
-        die("QUERY FAILED " . mysqli_error($connection));
+
+    if (!empty($user_password)) {
+        $query_pass = "SELECT user_password FROM users WHERE user_id = $user_id";
+        $select_pass = mysqli_query($connection, $query_pass);
+        confirmQuery($select_pass);
+        $row = mysqli_fetch_array($select_pass);
+        $db_user_password = $row['user_password'];
+        if ($db_user_password != $user_password) {
+            $hashed_password = password_hash($user_password, PASSWORD_BCRYPT, ['cost' => 10]);
+        }
+        $query = "UPDATE users SET ";
+        $query .= "user_firstname = '$user_firstname' , ";
+        $query .= "user_lastname = '$user_lastname' , ";
+        $query .= "user_role = '$user_role' , ";
+        $query .= "username = '$username' , ";
+        $query .= "user_email = '$user_email' , ";
+        $query .= "user_password = '$hashed_password' ";
+        $query .= "WHERE user_id = $user_id";
+        $edit_user_query = mysqli_query($connection, $query);
+        confirmQuery($edit_user_query);
+        echo "User Updated " . "<a href='users.php'>View Users?</a>";
     }
-    $row = mysqli_fetch_array($select_randSalt_query);
-    $salt = $row['randSalt'];
-    $hash_password = crypt($user_password, $salt);
 
-    $query = "UPDATE users SET ";
-    $query .= "user_firstname = '$user_firstname' , ";
-    $query .= "user_lastname = '$user_lastname' , ";
-    $query .= "user_role = '$user_role' , ";
-    $query .= "username = '$username' , ";
-    $query .= "user_email = '$user_email' , ";
-    $query .= "user_password = '$hash_password' ";
-    $query .= "WHERE user_id = $user_id";
-    $edit_user_query = mysqli_query($connection, $query);
-    confirmQuery($edit_user_query);
-    header("Location: users.php");
 }
 ?>
 <form action="" method="post" enctype="multipart/form-data">
@@ -58,11 +56,11 @@ if (isset($_POST['edit_user'])) {
     </div>
     <div class="form-group">
         <select name="user_role" id="">
-            <option value="<?= $user_role;?>"><?= $user_role ?></option>
+            <option value="<?= $user_role; ?>"><?= $user_role ?></option>
             <?php
-            if ($user_role === "admin"){
+            if ($user_role === "admin") {
                 echo "<option value='subscriber'>subscriber</option>";
-            }else{
+            } else {
                 echo "<option value='admin'>admin</option>";
             }
             ?>
@@ -80,11 +78,11 @@ if (isset($_POST['edit_user'])) {
     <!--    </div>-->
     <div class="form-group">
         <label for="">Email</label>
-        <input type="email" class="form-control" name="user_email" value="<?= $user_email?>">
+        <input type="email" class="form-control" name="user_email" value="<?= $user_email ?>">
     </div>
     <div class="form-group">
         <label for="">Password</label>
-        <input type="password" class="form-control" name="user_password" value="<?= $user_password ?>">
+        <input autocomplete="off" type="password" class="form-control" name="user_password">
     </div>
     <div class="form-group">
         <input type="submit" class="btn btn-primary" name="edit_user" value="Update User">

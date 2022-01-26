@@ -13,6 +13,17 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <?php
+            $query = "SELECT * FROM categories WHERE cat_id = $_GET[category]";
+            $cat_query = mysqli_query($connection , $query);
+            while($row = mysqli_fetch_array($cat_query)){
+                $cat_title = $row['cat_title'];
+            }
+            ?>
+            <h1 class="page-header">
+                All Posts for
+                <small><?= $cat_title ?></small>
+            </h1>
+            <?php
             if (isset($_GET['category'])) {
                 $post_category_id = $_GET['category'];
             }
@@ -32,10 +43,7 @@
                     $post_image = $row['post_image'];
                     $post_content = substr($row['post_content'], 0, 400) . "...";
                     ?>
-                    <h1 class="page-header">
-                        Page Heading
-                        <small>Secondary Text</small>
-                    </h1>
+
 
                     <!-- First Blog Post -->
                     <h2>

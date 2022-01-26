@@ -3,7 +3,7 @@
 <?php include "functions.php";?>
 <?php include "../includes/db.php";?>
 <?php
-if (!isset($_SESSION['user_role'])){
+if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin'){
     header("Location: ../index.php");
 }
 ?>

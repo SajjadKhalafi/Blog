@@ -5,13 +5,11 @@ if (isset($_POST['create_user'])) {
     $user_role = $_POST['user_role'];
     $username = $_POST['username'];
 
-//    $image_name = $_FILES['image']['name'];
-//    $image_tmp_name = $_FILES['image']['tmp_name'];
 
     $user_email = $_POST['user_email'];
     $user_password = $_POST['user_password'];
-//    $post_date = date("d-m-y");
 
+    $user_password = password_hash($user_password , PASSWORD_BCRYPT , ['cost' => 10]);
 
     $query = "INSERT INTO users(user_firstname , user_lastname , user_role , username , user_email , user_password)";
     $query .= " VALUES ('$user_firstname' , '$user_lastname' , '$user_role' , '$username' , '$user_email' , '$user_password')";

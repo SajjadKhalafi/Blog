@@ -30,7 +30,7 @@
                     $post_author = $row['post_author'];
                     $post_date = $row['post_date'];
                     $post_image = $row['post_image'];
-                    $post_content = substr($row['post_content'], 0, 100);
+                    $post_content = substr($row['post_content'], 0, 400) . "...";
                     ?>
                     <h1 class="page-header">
                         Page Heading
@@ -50,7 +50,7 @@
                         <img class="img-responsive" src="images/<?= $post_image ?>" alt="">
                     </a>
                     <hr>
-                    <p><?= $post_content ?></p>
+                    <p><?= $post_content ?></p><br>
                     <a class="btn btn-primary" href="post.php?p_id=<?= $post_id ?>">Read More <span
                                 class="glyphicon glyphicon-chevron-right"></span></a>
 

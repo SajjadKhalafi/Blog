@@ -77,12 +77,6 @@
                     if (!$create_comment_query) {
                         die("QUERY FAILED" . mysqli_error($connection));
                     }
-                    $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
-                    $query .= "WHERE post_id = $post_id";
-                    $update_post_comment_query = mysqli_query($connection, $query);
-                    if (!$update_post_comment_query) {
-                        die("QUERY FAILED" . mysqli_error($connection));
-                    }
                     header("Location: post.php?p_id=$post_id");
                 } else {
                     echo "<script>alert('Fields cannot be empty')</script>";

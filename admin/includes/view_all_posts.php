@@ -123,7 +123,7 @@ if (isset($_POST['checkboxArray'])) {
             $comment_id = $row['comment_id'];
             $comments_count = mysqli_num_rows($send_comments_query);
 
-            echo "<td><a href='comment.php?id=$comment_id'>{$comments_count}</a></td>";
+            echo "<td><a href='post_comments.php?id=$post_id'>{$comments_count}</a></td>";
 
 
             echo "<td>{$post_date}</td>";

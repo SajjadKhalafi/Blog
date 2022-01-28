@@ -104,10 +104,10 @@ if (isset($_POST['checkboxArray'])) {
             <?php
             echo "<td>{$post_id}</td>";
 
-            if (!empty($post_author)){
-                echo "<td>{$post_author}</td>";
-            }elseif (!empty($post_user)){
+            if (!empty($post_user)){
                 echo "<td>{$post_user}</td>";
+            }elseif (!empty($post_author)){
+                echo "<td>{$post_author}</td>";
             }
 
             echo "<td>{$post_title}</td>";

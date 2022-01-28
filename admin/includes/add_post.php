@@ -2,7 +2,7 @@
 if (isset($_POST['create_post'])) {
     $post_title = mysqli_real_escape_string($connection , $_POST['post_title']);
     $post_category_id = $_POST['post_category'];
-    $post_author = mysqli_real_escape_string($connection , $_POST['post_author']);
+    $post_user = $_POST['post_user'];
     $post_status = $_POST['post_status'];
 
     $image_name = $_FILES['image']['name'];
@@ -14,8 +14,8 @@ if (isset($_POST['create_post'])) {
 
     move_uploaded_file($image_tmp_name, "../images/$image_name");
 
-    $query = "INSERT INTO posts(post_category_id , post_title , post_author , post_date , post_image , post_content , post_tags  , post_status)";
-    $query .= " VALUES ($post_category_id , '$post_title' , '$post_author' , now() , '$image_name' , '$post_content' , '$post_tags' , '$post_status')";
+    $query = "INSERT INTO posts(post_category_id , post_title , post_user , post_date , post_image , post_content , post_tags  , post_status)";
+    $query .= " VALUES ($post_category_id , '$post_title' , '$post_user' , now() , '$image_name' , '$post_content' , '$post_tags' , '$post_status')";
     $create_post = mysqli_query($connection, $query);
     confirmQuery($create_post);
     $post_id = mysqli_insert_id($connection);
@@ -50,7 +50,7 @@ if (isset($_POST['create_post'])) {
 
     <div class="form-group">
         <label for="users">User</label>
-        <select name="post_author" id="users">
+        <select name="post_user" id="users">
             <?php
             $query = "SELECT * FROM users";
             $select_users = mysqli_query($connection, $query);

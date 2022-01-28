@@ -31,7 +31,9 @@ if (isset($_POST['create_post'])) {
         <label for="">Post Title</label>
         <input type="text" class="form-control" name="post_title">
     </div>
+
     <div class="form-group">
+        <label for="post_category">Category</label>
         <select name="post_category" id="post_category">
             <?php
             $query = "SELECT * FROM categories";
@@ -45,29 +47,47 @@ if (isset($_POST['create_post'])) {
             ?>
         </select>
     </div>
+
     <div class="form-group">
-        <label for="">Post Author</label>
-        <input type="text" class="form-control" name="post_author">
+        <label for="users">User</label>
+        <select name="post_author" id="users">
+            <?php
+            $query = "SELECT * FROM users";
+            $select_users = mysqli_query($connection, $query);
+            confirmQuery($select_users);
+            while ($row = mysqli_fetch_assoc($select_users)) {
+                $user_id = $row['user_id'];
+                $username = $row['username'];
+                echo "<option value='$user_id'>$username</option>";
+            }
+            ?>
+        </select>
     </div>
+
     <div class="form-group">
-        <select name="post_status" id="">
+        <label for="status">Status</label>
+        <select name="post_status" id="status">
             <option value="">Select Options</option>
             <option value="published">Publish</option>
             <option value="draft">Draft</option>
         </select>
     </div>
+
     <div class="form-group">
-        <label for="">Post Author</label>
+        <label for="">Post Image</label>
         <input type="file" name="image">
     </div>
+
     <div class="form-group">
         <label for="">Post Tags</label>
         <input type="text" class="form-control" name="post_tags">
     </div>
+
     <div class="form-group">
         <label for="">Post Content</label>
         <textarea class="form-control" name="post_content" id="body" cols="30" rows="10"></textarea>
     </div>
+
     <div class="form-group">
         <input type="submit" class="btn btn-primary" name="create_post" value="Publish Post">
     </div>

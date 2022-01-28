@@ -5,7 +5,7 @@ $query = "SELECT * FROM posts WHERE post_id = $p_id";
 $select_post_by_id = mysqli_query($connection, $query);
 while ($row = mysqli_fetch_assoc($select_post_by_id)) {
     $post_id = $row['post_id'];
-    $post_author = $row['post_author'];
+    $post_user = $row['post_user'];
     $post_title = $row['post_title'];
     $post_category_id = $row['post_category_id'];
     $post_status = $row['post_status'];
@@ -94,7 +94,11 @@ if (isset($_POST['update_post'])){
             while ($row = mysqli_fetch_assoc($select_users)) {
                 $user_id = $row['user_id'];
                 $username = $row['username'];
-                echo "<option value='$username'>$username</option>";
+                if ($username == $post_user){
+                    echo "<option value='$username' selected>$username</option>";
+                }else{
+                    echo "<option value='$username'>$username</option>";
+                }
             }
             ?>
         </select>

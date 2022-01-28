@@ -16,18 +16,18 @@
             <?php
             if (isset($_GET['p_id'])) {
                 $post_id = $_GET['p_id'];
-                $post_author = $_GET['author'];
+                $post_user = $_GET['author'];
             }
             echo "                <h1 class='page-header'>
                     All Posts by 
-                    <small>$post_author</small>
+                    <small>$post_user</small>
                 </h1>";
-            $query = "SELECT * FROM posts WHERE post_author = '$post_author' ORDER BY post_id DESC";
+            $query = "SELECT * FROM posts WHERE post_user = '$post_user' ORDER BY post_id DESC";
             $select_all_posts_by_author_query = mysqli_query($connection, $query);
             while ($row = mysqli_fetch_assoc($select_all_posts_by_author_query)) {
                 $post_id = $row['post_id'];
                 $post_title = $row['post_title'];
-                $post_author = $row['post_author'];
+                $post_user = $row['post_user'];
                 $post_date = $row['post_date'];
                 $post_image = $row['post_image'];
                 $post_content = substr($row['post_content'], 0, 500);

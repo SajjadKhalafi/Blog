@@ -27,7 +27,7 @@
                 $select_all_posts_query = mysqli_query($connection, $query);
                 while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
                     $post_title = $row['post_title'];
-                    $post_author = $row['post_author'];
+                    $post_user = $row['post_user'];
                     $post_date = $row['post_date'];
                     $post_image = $row['post_image'];
                     $post_content = $row['post_content'];
@@ -43,7 +43,7 @@
                     </h2>
                     <p class="lead">
                         by
-                        <a href="author_posts.php?author=<?= $post_author ?>&p_id=<?= $post_id ?>"><?= $post_author ?></a>
+                        <a href="author_posts.php?author=<?= $post_user ?>&p_id=<?= $post_id ?>"><?= $post_user ?></a>
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span> Posted on <?= $post_date ?></p>
                     <hr>

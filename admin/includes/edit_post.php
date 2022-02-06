@@ -25,7 +25,7 @@ if (isset($_POST['update_post'])){
     $post_user = escape($_POST['post_user']);
     $post_status = escape($_POST['post_status']);
     $post_image = escape($_FILES['post_image']['name']);
-    $post_image_tmp = escape($_FILES['post_image']['tmp_name']);
+    $post_image_tmp = $_FILES['post_image']['tmp_name'];
     $post_tags = escape($_POST['post_tags']);
     $post_content = escape($_POST['post_content']);
 

@@ -34,7 +34,7 @@
                         </thead>
                         <tbody>
                         <?php
-                        $query = "SELECT * FROM comments WHERE comment_post_id = " . mysqli_real_escape_string($connection , $_GET['id']) . " ORDER BY comment_id DESC";
+                        $query = "SELECT * FROM comments WHERE comment_post_id = " . escape($_GET['id']) . " ORDER BY comment_id DESC";
                         $select_comments = mysqli_query($connection, $query);
                         while ($row = mysqli_fetch_assoc($select_comments)) {
                             $comment_id = $row['comment_id'];
@@ -74,20 +74,20 @@
                         <?php
 
                         if (isset($_GET['approve'])) {
-                            $comment_id = $_GET['approve'];
+                            $comment_id = escape($_GET['approve']);
                             $query = "UPDATE comments SET comment_status = 'Approved' WHERE comment_id = $comment_id";
                             $deleteComment = mysqli_query($connection, $query);
                             header("Location: post_comments.php?id=$_GET[id]");
                         }
 
                         if (isset($_GET['unApprove'])) {
-                            $comment_id = $_GET['unApprove'];
+                            $comment_id = escape($_GET['unApprove']);
                             $query = "UPDATE comments SET comment_status = 'unApproved' WHERE comment_id = $comment_id";
                             $deleteComment = mysqli_query($connection, $query);
                             header("Location: post_comments.php?id=$_GET[id]");
                         }
                         if (isset($_GET['delete'])) {
-                            $comment_id = $_GET['delete'];
+                            $comment_id = escape($_GET['delete']);
                             $query = "DELETE FROM comments WHERE comment_id = $comment_id";
                             $deleteComment = mysqli_query($connection, $query);
                             header("Location: post_comments.php?id=$_GET[id]");

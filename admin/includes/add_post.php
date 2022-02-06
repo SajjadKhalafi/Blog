@@ -1,16 +1,16 @@
 <?php
 if (isset($_POST['create_post'])) {
-    $post_title = mysqli_real_escape_string($connection , $_POST['post_title']);
-    $post_category_id = $_POST['post_category'];
-    $post_user = $_POST['post_user'];
-    $post_status = $_POST['post_status'];
+    $post_title = escape($_POST['post_title']);
+    $post_category_id = escape($_POST['post_category']);
+    $post_user = escape($_POST['post_user']);
+    $post_status = escape($_POST['post_status']);
 
-    $image_name = $_FILES['image']['name'];
-    $image_tmp_name = $_FILES['image']['tmp_name'];
+    $image_name = escape($_FILES['image']['name']);
+    $image_tmp_name = escape($_FILES['image']['tmp_name']);
 
-    $post_tags = mysqli_real_escape_string($connection , $_POST['post_tags']);
-    $post_content = mysqli_real_escape_string($connection , $_POST['post_content']);
-    $post_date = date("d-m-y");
+    $post_tags = escape($_POST['post_tags']);
+    $post_content = escape($_POST['post_content']);
+    $post_date = escape(date("d-m-y"));
 
     move_uploaded_file($image_tmp_name, "../images/$image_name");
 

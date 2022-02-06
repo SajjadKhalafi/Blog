@@ -127,11 +127,9 @@ if (isset($_POST['checkboxArray'])) {
             $query = "SELECT * FROM comments WHERE comment_post_id = $post_id";
             $send_comments_query = mysqli_query($connection , $query);
             $row = mysqli_fetch_array($send_comments_query);
-            $comment_id = $row['comment_id'];
             $comments_count = mysqli_num_rows($send_comments_query);
 
             echo "<td><a href='post_comments.php?id=$post_id'>{$comments_count}</a></td>";
-
 
             echo "<td>{$post_date}</td>";
             echo "<td><a href='../post.php?p_id=$post_id' class='btn btn-info btn-sm'>View Post</a></td>";
@@ -144,7 +142,7 @@ if (isset($_POST['checkboxArray'])) {
 
         <?php
         if (isset($_GET['delete'])) {
-            $post_id = $_GET['delete'];
+            $post_id = escape($_GET['delete']);
             $query = "DELETE FROM posts WHERE post_id = $post_id";
             $deletePost = mysqli_query($connection, $query);
             header("Location: posts.php");
@@ -153,7 +151,8 @@ if (isset($_POST['checkboxArray'])) {
 
         <?php
         if (isset($_GET['reset'])) {
-            $query = "UPDATE posts SET post_view_count = 0 WHERE post_id = " . mysqli_real_escape_string($connection , $_GET['reset']);
+            $post_id = escape($_GET['reset']);
+            $query = "UPDATE posts SET post_view_count = 0 WHERE post_id = $post_id";
             $resetPost = mysqli_query($connection, $query);
             header("Location: posts.php");
         }

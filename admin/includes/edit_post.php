@@ -1,6 +1,6 @@
 <?php
 if (isset($_GET['p_id'])){
-    $p_id = $_GET['p_id'];
+    $p_id = escape($_GET['p_id']);
 $query = "SELECT * FROM posts WHERE post_id = $p_id";
 $select_post_by_id = mysqli_query($connection, $query);
 while ($row = mysqli_fetch_assoc($select_post_by_id)) {
@@ -20,14 +20,14 @@ while ($row = mysqli_fetch_assoc($select_post_by_id)) {
 
 <?php
 if (isset($_POST['update_post'])){
-    $post_title = mysqli_real_escape_string($connection , $_POST['post_title']);
-    $post_category_id = $_POST['post_category'];
-    $post_user = $_POST['post_user'];
-    $post_status = $_POST['post_status'];
-    $post_image = $_FILES['post_image']['name'];
-    $post_image_tmp = $_FILES['post_image']['tmp_name'];
-    $post_tags = mysqli_real_escape_string($connection , $_POST['post_tags']);
-    $post_content = mysqli_real_escape_string($connection , $_POST['post_content']);
+    $post_title = escape($_POST['post_title']);
+    $post_category_id = escape($_POST['post_category']);
+    $post_user = escape($_POST['post_user']);
+    $post_status = escape($_POST['post_status']);
+    $post_image = escape($_FILES['post_image']['name']);
+    $post_image_tmp = escape($_FILES['post_image']['tmp_name']);
+    $post_tags = escape($_POST['post_tags']);
+    $post_content = escape($_POST['post_content']);
 
     move_uploaded_file($post_image_tmp , "../images/$post_image");
 

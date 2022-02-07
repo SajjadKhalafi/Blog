@@ -3,10 +3,11 @@
 
 <?php
 if (isset($_POST['submit'])) {
+    $from = $_POST['email'];
     $to = "sajjadkhalafi956@gmail.com";
     $subject = $_POST['subject'];
     $body = $_POST['body'];
-
+    mail($to , $subject , $body , $from);
 }
 ?>
 <!-- Navigation -->
@@ -23,7 +24,7 @@ if (isset($_POST['submit'])) {
                 <div class="col-xs-6 col-xs-offset-3">
                     <div class="form-wrap">
                         <h1>Contact</h1>
-                        <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
+                        <form role="form" action="" method="post" id="login-form" autocomplete="off">
                             <h6 class="text-center"><?= $message ?? ''; ?></h6>
 
                             <div class="form-group">

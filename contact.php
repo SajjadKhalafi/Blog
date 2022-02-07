@@ -3,30 +3,9 @@
 
 <?php
 if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    if (!empty($username) && !empty($email) && !empty($password)){
-        $username = mysqli_real_escape_string($connection , $username);
-        $email = mysqli_real_escape_string($connection , $email);
-        $password = mysqli_real_escape_string($connection , $password);
-
-        $password = password_hash($password , PASSWORD_BCRYPT , ['cost' => 12]);
-
-
-        $query = "INSERT INTO users (username , user_email , user_password , user_role) ";
-        $query .= "VALUES ('{$username}' , '{$email}' , '{$password}' , 'subscriber' ) ";
-        $insert_user_query = mysqli_query($connection , $query);
-        if (!$insert_user_query){
-            die("QUERY FAILED " . mysqli_error($connection) . ' ' . mysqli_errno($connection));
-        }
-        $message = "your registration has bin submitted!!";
-    }
-    else{
-        $message = "Fields cannot be empty!";
-    }
-
+    $to = "sajjadkhalafi956@gmail.com";
+    $subject = $_POST['subject'];
+    $body = $_POST['body'];
 
 }
 ?>

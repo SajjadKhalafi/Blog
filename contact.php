@@ -3,7 +3,7 @@
 
 <?php
 if (isset($_POST['submit'])) {
-    $from = $_POST['email'];
+    $from = 'From:' . $_POST['email'];
     $to = "sajjadkhalafi956@gmail.com";
     $subject = $_POST['subject'];
     $body = $_POST['body'];

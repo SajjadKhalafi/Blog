@@ -12,6 +12,9 @@
 
         <!-- Blog Entries Column -->
         <div class="col-md-8">
+            <h1 class="page-header">
+                Home Page
+            </h1>
             <?php
             $per_page = 5;
             $page = $_GET['page'] ?? 1;
@@ -45,10 +48,7 @@
 
 
                     ?>
-                    <h1 class="page-header">
-                        Page Heading
-                        <small>Secondary Text</small>
-                    </h1>
+
 
                     <!-- First Blog Post -->
                     <h2>

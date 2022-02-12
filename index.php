@@ -24,14 +24,20 @@
                 $page_1 = ($page * $per_page) - $per_page;
             }
 
+            if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'){
+                $select_post_query = "SELECT * FROM posts ";
+            }else{
+                $select_post_query = "SELECT * FROM posts WHERE post_status = 'published' ";
+            }
 
-            $select_post_query = "SELECT * FROM posts WHERE post_status = 'published' ";
             $post_query_count = mysqli_query($connection , $select_post_query);
             $count = mysqli_num_rows($post_query_count);
             $count = ceil($count / 5);
 
             $query = "SELECT * FROM posts ";
-            $query .= "WHERE post_status = 'published' ";
+            if ($_SESSION['user_role'] !== 'admin'){
+                $query .= "WHERE post_status = 'published' ";
+            }
             $query .= "ORDER BY post_id DESC LIMIT $page_1 , $per_page";
             $select_all_posts_query = mysqli_query($connection, $query);
             if (mysqli_num_rows($select_all_posts_query) === 0)

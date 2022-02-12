@@ -29,7 +29,9 @@
             }
             $query = "SELECT * FROM posts ";
             $query .= "WHERE post_category_id = $post_category_id ";
-            $query .= "AND post_status = 'published' ";
+            if (isset($_SESSION['user_role']) && $_SESSION['user_role'] !== 'admin'){
+                $query .= "AND post_status = 'published' ";
+            }
             $query .= "ORDER BY post_id DESC";
             $select_all_posts_query = mysqli_query($connection, $query);
             if (mysqli_num_rows($select_all_posts_query) === 0)

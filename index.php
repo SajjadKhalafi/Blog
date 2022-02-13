@@ -35,7 +35,7 @@
             $count = ceil($count / 5);
 
             $query = "SELECT * FROM posts ";
-            if ($_SESSION['user_role'] !== 'admin'){
+            if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin'){
                 $query .= "WHERE post_status = 'published' ";
             }
             $query .= "ORDER BY post_id DESC LIMIT $page_1 , $per_page";

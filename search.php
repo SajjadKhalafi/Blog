@@ -21,7 +21,7 @@
                 $search = $_POST['search'];
                 $query = "SELECT * FROM posts ";
                 $query .= "WHERE post_tags LIKE '%$search%' ";
-                if (isset($_SESSION['user_role']) && $_SESSION['user_role'] !== 'admin'){
+                if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin'){
                     $query .= "AND post_status = 'published' ";
                 }
                 $query .= " ORDER BY post_id DESC";

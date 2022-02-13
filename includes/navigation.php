@@ -41,7 +41,9 @@
                 <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'): ?>
                     <li><a href='admin/'>Admin</a></li>
                 <?php endif; ?>
-                <li class="<?= $registration_class; ?>"><a href='registration.php'>Registration</a></li>
+                <?php if(!isset($_SESSION['username'])): ?>
+                    <li class="<?= $registration_class; ?>"><a href='registration.php'>Registration</a></li>
+                <?php endif; ?>
                 <li class="<?= $contact_class; ?>"><a href='contact.php'>Contact</a></li>
                 <?php
                 if (isset($_SESSION['user_role'])){

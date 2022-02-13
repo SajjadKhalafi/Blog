@@ -21,20 +21,25 @@
 
     <!-- Login -->
     <div class="well">
-        <form action="includes/login.php" method="post">
-            <h4>Login</h4>
-            <div class="form-group">
-                <input name="username" type="text" class="form-control" placeholder="Enter Username">
-            </div>
-            <div class="input-group">
-                <input name="password" type="password" class="form-control" placeholder="Enter Password">
-                <span class="input-group-btn">
-                        <button name="login" class="btn btn-primary" type="submit">
-                            Submit
-                        </button>
-                    </span>
-            </div>
-        </form>
+        <?php if (!isset($_SESSION['username'])): ?>
+            <form action="includes/login.php" method="post">
+                <h4>Login</h4>
+                <div class="form-group">
+                    <input name="username" type="text" class="form-control" placeholder="Enter Username">
+                </div>
+                <div class="input-group">
+                    <input name="password" type="password" class="form-control" placeholder="Enter Password">
+                    <span class="input-group-btn">
+                            <button name="login" class="btn btn-primary" type="submit">
+                                Submit
+                            </button>
+                        </span>
+                </div>
+            </form>
+        <?php else: ?>
+            <h4>Logged in as <?= $_SESSION['username']; ?></h4>
+            <a class="btn btn-primary" href="includes/logout.php">Logout</a>
+        <?php endif; ?>
         <!-- /.input-group -->
     </div>
 

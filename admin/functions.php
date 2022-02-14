@@ -93,3 +93,13 @@ function deleteCategory()
         header("Location: categories.php");
     }
 }
+
+function recordCount($table)
+{
+    global $connection;
+    $query = "SELECT * FROM $table";
+    $select_all_posts = mysqli_query($connection, $query);
+    $result = mysqli_num_rows($select_all_posts);
+    confirmQuery($result);
+    return $result;
+}

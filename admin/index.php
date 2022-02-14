@@ -113,21 +113,10 @@
             </div>
             <!-- /.row -->
             <?php
-            $query = "SELECT * FROM posts WHERE post_status = 'published' ";
-            $select_all_publish_posts = mysqli_query($connection, $query);
-            $publish_posts_count = mysqli_num_rows($select_all_publish_posts);
-
-            $query = "SELECT * FROM posts WHERE post_status = 'draft' ";
-            $select_all_draft_posts = mysqli_query($connection, $query);
-            $draft_posts_count = mysqli_num_rows($select_all_draft_posts);
-
-            $query = "SELECT * FROM comments WHERE comment_status = 'unApproved' ";
-            $select_all_unApproved_comments = mysqli_query($connection, $query);
-            $unApproved_comments_count = mysqli_num_rows($select_all_unApproved_comments);
-
-            $query = "SELECT * FROM users WHERE user_role = 'subscriber' ";
-            $select_all_subscribers = mysqli_query($connection, $query);
-            $subscriber_count = mysqli_num_rows($select_all_subscribers);
+            $publish_posts_count = checkStatus('posts','post_status' , 'published');
+            $draft_posts_count = checkStatus('posts','post_status' , 'draft');
+            $unApproved_comments_count = checkStatus('comments','comment_status' , 'unApproved');
+            $subscriber_count = checkUserRole('users' , 'user_role' , 'subscriber');
             ?>
             <div class="row">
                 <script type="text/javascript">

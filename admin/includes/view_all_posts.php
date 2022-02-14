@@ -85,15 +85,17 @@ if (isset($_POST['checkboxArray'])) {
         </thead>
         <tbody>
         <?php
-//        $query = "SELECT * FROM posts ORDER BY post_id DESC";
 
         $query = "SELECT p.post_id , p.post_author , p.post_user , p.post_title , p.post_category_id , ";
         $query .= "p.post_status , p.post_image , p.post_tags , p.post_comment_count , p.post_date , p.post_view_count , ";
         $query .= "cat.cat_id , cat.cat_title ";
         $query .= "FROM posts as p ";
         $query .= "LEFT JOIN categories as cat ";
-        $query .= "ON p.post_category_id = cat.cat_id";
+        $query .= "ON p.post_category_id = cat.cat_id ";
+        $query .= "ORDER BY p.post_id DESC";
+
         $select_posts = mysqli_query($connection, $query);
+
         while ($row = mysqli_fetch_assoc($select_posts)) {
             $post_id = $row['post_id'];
             $post_author = $row['post_author'];
@@ -106,48 +108,40 @@ if (isset($_POST['checkboxArray'])) {
             $post_comments_count = $row['post_comment_count'];
             $post_date = $row['post_date'];
             $post_view_count = $row['post_view_count'];
-
-            echo "<tr>";
+            $category_id = $row['cat_id'];
+            $category_title = $row['cat_title'];
             ?>
+            <tr>
             <td><input type='checkbox' class='checkBoxes' name='checkboxArray[]' value='<?= $post_id; ?>'></td>
+            <td><?= $post_id ?></td>
+
+            <?php if (!empty($post_user)): ?>
+                <td><?= $post_user ?></td>
+            <?php elseif (!empty($post_author)): ?>
+                <td><?= $post_author?></td>
+            <?php endif; ?>
+
+            <td><?= $post_title ?></td>
+            <td><?= $category_title ?></td>
+            <td><?= $post_status ?></td>
+            <td><img src='../images/<?= $post_image ?>' width='100'></td>
+            <td><?= $post_tags ?></td>
+
             <?php
-            echo "<td>{$post_id}</td>";
-
-            if (!empty($post_user)){
-                echo "<td>{$post_user}</td>";
-            }elseif (!empty($post_author)){
-                echo "<td>{$post_author}</td>";
-            }
-
-            echo "<td>{$post_title}</td>";
-
-            // display categoey title
-            $query = "SELECT * FROM categories WHERE cat_id = {$post_category_id}";
-            $select_categories = mysqli_query($connection, $query);
-            while ($row = mysqli_fetch_assoc($select_categories)) {
-                $cat_id = $row['cat_id'];
-                $cat_title = $row['cat_title'];
-                echo "<td>{$cat_title}</td>";
-            }
-            echo "<td>{$post_status}</td>";
-            echo "<td><img src='../images/{$post_image}' width='100'> </td>";
-            echo "<td>{$post_tags}</td>";
-
             $query = "SELECT * FROM comments WHERE comment_post_id = $post_id";
             $send_comments_query = mysqli_query($connection , $query);
             $row = mysqli_fetch_array($send_comments_query);
             $comments_count = mysqli_num_rows($send_comments_query);
+            ?>
 
-            echo "<td><a href='post_comments.php?id=$post_id'>{$comments_count}</a></td>";
-
-            echo "<td>{$post_date}</td>";
-            echo "<td><a href='../post.php?p_id=$post_id' class='btn btn-info btn-sm'>View Post</a></td>";
-            echo "<td><a href='posts.php?source=edit_post&p_id=$post_id' class='btn btn-primary btn-sm'>Edit</a></td>";
-            echo "<td><a rel='$post_id' href='javascript:void(0)' class='btn btn-danger btn-sm delete_link'>Delete</a></td>";
-            echo "<td><a href='posts.php?reset=$post_id'>$post_view_count</a></td>";
-            echo "</tr>";
-        }
-        ?>
+            <td><a href='post_comments.php?id=<?= $post_id?>'><?= $comments_count?></a></td>
+            <td><?= $post_date ?></td>
+            <td><a href='../post.php?p_id=<?= $post_id ?>' class='btn btn-info btn-sm'>View Post</a></td>
+            <td><a href='posts.php?source=edit_post&p_id=<?= $post_id?>' class='btn btn-primary btn-sm'>Edit</a></td>
+            <td><a rel='<?= $post_id?>' href='javascript:void(0)' class='btn btn-danger btn-sm delete_link'>Delete</a></td>
+            <td><a href='posts.php?reset=<?= $post_id?>'><?= $post_view_count ?></a></td>
+            </tr>
+        <?php } ?>
 
         <?php
         if (isset($_GET['delete'])) {

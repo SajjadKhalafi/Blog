@@ -56,7 +56,7 @@ if ($pageName == 'index.php'){
                 <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
             </li>
             <li class="<?= $posts_class ?>">
-                <a href="javascript:;" data-toggle="collapse" data-target="#posts_dropdown"><i class="fa fa-fw fa-arrows-v"></i> Posts <i class="fa fa-fw fa-caret-down"></i></a>
+                <a href="javascript:;" data-toggle="collapse" data-target="#posts_dropdown"><i class="fa fa-file-text fa-fw"></i> Posts <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="posts_dropdown" class="collapse">
                     <li>
                         <a href="./posts.php">View All Posts</a>
@@ -67,13 +67,13 @@ if ($pageName == 'index.php'){
                 </ul>
             </li>
             <li class="<?= $category_class ?>">
-                <a href="./categories.php"><i class="fa fa-fw fa-desktop"></i> Categories</a>
+                <a href="./categories.php"><i class="fa fa-list fa-fw"></i> Categories</a>
             </li>
             <li class="<?= $comments_class ?>">
-                <a href="./comments.php"><i class="fa fa-fw fa-wrench"></i> Comments</a>
+                <a href="./comments.php"><i class="fa fa-comments fa-fw"></i> Comments</a>
             </li>
             <li class="<?= $users_class ?>">
-                <a href="javascript:;" data-toggle="collapse" data-target="#users_dropdown"><i class="fa fa-fw fa-arrows-v"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
+                <a href="javascript:;" data-toggle="collapse" data-target="#users_dropdown"><i class="fa fa-users fa-fw"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="users_dropdown" class="collapse">
                     <li>
                         <a href="./users.php">View All Users</a>
@@ -84,7 +84,7 @@ if ($pageName == 'index.php'){
                 </ul>
             </li>
             <li class="<?= $profile_class ?>">
-                <a href="profile.php"><i class="fa fa-fw fa-file"></i> Profile</a>
+                <a href="profile.php"><i class="fa fa-fw fa-user"></i> Profile</a>
             </li>
         </ul>
     </div>

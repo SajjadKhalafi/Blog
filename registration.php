@@ -27,6 +27,13 @@ if (isset($_POST['submit'])) {
 
     if ($password == '')
         $errors['password'] = 'Password cannot be empty';
+
+    foreach ($errors as $key => $value) {
+        if (empty($value)){
+            register_user($username , $email , $password);
+            login_user($username , $password);
+        }
+    }
 }
 ?>
 <!-- Navigation -->

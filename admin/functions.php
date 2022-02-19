@@ -8,14 +8,14 @@ function redirect($location)
 function escape($string)
 {
     global $connection;
-    return mysqli_real_escape_string($connection , trim($string));
+    return mysqli_real_escape_string($connection, trim($string));
 }
 
 function users_online()
 {
-    if (isset($_GET['onlineUsers'])){
+    if (isset($_GET['onlineUsers'])) {
         global $connection;
-        if (!$connection){
+        if (!$connection) {
             session_start();
             include "../includes/db.php";
             $session = session_id();
@@ -24,19 +24,19 @@ function users_online()
             $time_out = $time - $time_out_by_seconds;
 
             $query = "SELECT * FROM users_online WHERE session = '$session'";
-            $select_online = mysqli_query($connection , $query);
+            $select_online = mysqli_query($connection, $query);
             $count = mysqli_num_rows($select_online);
 
-            if ($count == NULL){
+            if ($count == NULL) {
                 $query = "INSERT INTO users_online (session , time) VALUES ('$session' , $time)";
-                $send_query = mysqli_query($connection , $query);
-            }else{
+                $send_query = mysqli_query($connection, $query);
+            } else {
                 $query = "UPDATE users_online SET time = $time WHERE session = '$session'";
-                $update_query = mysqli_query($connection , $query);
+                $update_query = mysqli_query($connection, $query);
             }
 
             $select_users_online = "SELECT * FROM users_online WHERE time > '$time_out'";
-            $select_query = mysqli_query($connection , $select_users_online);
+            $select_query = mysqli_query($connection, $select_users_online);
             echo $count_online_users = mysqli_num_rows($select_query);
         }
     }
@@ -47,7 +47,7 @@ users_online();
 function confirmQuery($result)
 {
     global $connection;
-    if(!$result){
+    if (!$result) {
         die("Query Failed " . mysqli_error($connection));
     }
 }
@@ -109,7 +109,7 @@ function recordCount($table)
     return $result;
 }
 
-function checkStatus($table , $column , $status)
+function checkStatus($table, $column, $status)
 {
     global $connection;
 
@@ -118,7 +118,7 @@ function checkStatus($table , $column , $status)
     return mysqli_num_rows($result);
 }
 
-function checkUserRole($table , $column , $role)
+function checkUserRole($table, $column, $role)
 {
     global $connection;
 
@@ -132,12 +132,12 @@ function is_admin($username)
     global $connection;
 
     $query = "SELECT user_role FROM users WHERE username = '$username'";
-    $result = mysqli_query($connection , $query);
+    $result = mysqli_query($connection, $query);
     confirmQuery($result);
     $row = mysqli_fetch_array($result);
-    if ($row['user_role'] == 'admin'){
+    if ($row['user_role'] == 'admin') {
         return true;
-    }else{
+    } else {
         return false;
     }
 }
@@ -147,7 +147,7 @@ function username_exists($username)
     global $connection;
 
     $query = "SELECT username FROM users WHERE username = '$username'";
-    $result = mysqli_query($connection , $query);
+    $result = mysqli_query($connection, $query);
     confirmQuery($result);
     if (mysqli_num_rows($result) > 0)
         return true;
@@ -160,7 +160,7 @@ function email_exists($email)
     global $connection;
 
     $query = "SELECT user_email FROM users WHERE user_email = '$email'";
-    $result = mysqli_query($connection , $query);
+    $result = mysqli_query($connection, $query);
     confirmQuery($result);
     if (mysqli_num_rows($result) > 0)
         return true;
@@ -168,3 +168,19 @@ function email_exists($email)
         return false;
 }
 
+function register_user($username, $email, $password)
+{
+    global $connection;
+
+    if (!empty($username) && !empty($email) && !empty($password)) {
+        $username = escape($username);
+        $email = escape($email);
+        $password = escape($password);
+
+        $password = password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]);
+        $query = "INSERT INTO users (username , user_email , user_password , user_role) ";
+        $query .= "VALUES ('{$username}' , '{$email}' , '{$password}' , 'subscriber' ) ";
+        $insert_user_query = mysqli_query($connection, $query);
+        confirmQuery($insert_user_query);
+    }
+}

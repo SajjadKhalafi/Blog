@@ -3,36 +3,30 @@
 
 <?php
 if (isset($_POST['submit'])) {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $username = trim($_POST['username']);
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
 
+    $errors = [
+        'username' => '',
+        'email' => '',
+        'password' => ''
+    ];
 
-    if (!empty($username) && !empty($email) && !empty($password)){
-        $username = mysqli_real_escape_string($connection , $username);
-        $email = mysqli_real_escape_string($connection , $email);
-        $password = mysqli_real_escape_string($connection , $password);
+    if ($username == '')
+        $errors['username'] = "Username cannot be empty";
+    elseif (strlen($username) < 4)
+        $errors['username'] = "Username needs to be longer";
+    elseif (username_exists($username))
+        $errors['username'] = "Username already exists, pick another one";
 
-        $password = password_hash($password , PASSWORD_BCRYPT , ['cost' => 12]);
-        if (username_exists($username)){
-            $message = "Username Exists!!!!";
-        }elseif (email_exists($email)) {
-            $message = "Email Exists!!!!";
-        }else {
-            $query = "INSERT INTO users (username , user_email , user_password , user_role) ";
-            $query .= "VALUES ('{$username}' , '{$email}' , '{$password}' , 'subscriber' ) ";
-            $insert_user_query = mysqli_query($connection, $query);
-            if (!$insert_user_query) {
-                die("QUERY FAILED " . mysqli_error($connection) . ' ' . mysqli_errno($connection));
-            }
-            $message = "your registration has bin submitted!!";
-        }
-    }
-    else{
-        $message = "Fields cannot be empty!";
-    }
+    if ($email == '')
+        $errors['email'] = "Email cannot be empty";
+    elseif (email_exists($email))
+        $errors['email'] = "Email already exists, <a href='index.php'>Please Login</a>";
 
-
+    if ($password == '')
+        $errors['password'] = 'Password cannot be empty';
 }
 ?>
 <!-- Navigation -->

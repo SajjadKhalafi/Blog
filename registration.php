@@ -15,7 +15,9 @@ if (isset($_POST['submit'])) {
 
         $password = password_hash($password , PASSWORD_BCRYPT , ['cost' => 12]);
         if (username_exists($username)){
-            $message = "User Exists!!!!";
+            $message = "Username Exists!!!!";
+        }elseif (email_exists($email)) {
+            $message = "Email Exists!!!!";
         }else {
             $query = "INSERT INTO users (username , user_email , user_password , user_role) ";
             $query .= "VALUES ('{$username}' , '{$email}' , '{$password}' , 'subscriber' ) ";

@@ -1,5 +1,10 @@
 <?php
 
+function redirect($location)
+{
+    return header("Location: " . $location);
+}
+
 function escape($string)
 {
     global $connection;
@@ -162,3 +167,4 @@ function email_exists($email)
     else
         return false;
 }
+

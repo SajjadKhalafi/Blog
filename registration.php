@@ -30,8 +30,8 @@ if (isset($_POST['submit'])) {
 
     foreach ($errors as $key => $value) {
         if (empty($value)){
-            register_user($username , $email , $password);
-            login_user($username , $password);
+//            register_user($username , $email , $password);
+//            login_user($username , $password);
         }
     }
 }
@@ -51,23 +51,25 @@ if (isset($_POST['submit'])) {
                     <div class="form-wrap">
                         <h1>Register</h1>
                         <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
-                            <h6 class="text-center"><?= $message ?? ''; ?></h6>
                             <div class="form-group">
                                 <label for="username" class="sr-only">username</label>
                                 <input type="text" name="username" id="username" class="form-control"
                                        placeholder="Enter Desired Username" autocomplete="on"
                                         value="<?= $username ?? '' ?>">
+                                <p style="color: red"><?= $errors['username'] ?? '' ?></p>
                             </div>
                             <div class="form-group">
                                 <label for="email" class="sr-only">Email</label>
                                 <input type="email" name="email" id="email" class="form-control"
                                        placeholder="somebody@example.com" autocomplete="on"
                                        value="<?= $email ?? '' ?>">
+                                <p style="color: red"><?= $errors['email'] ?? '' ?></p>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="sr-only">Password</label>
                                 <input type="password" name="password" id="key" class="form-control"
                                        placeholder="Password">
+                                <p style="color: red"><?= $errors['password'] ?? '' ?></p>
                             </div>
 
                             <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block"

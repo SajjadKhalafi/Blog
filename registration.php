@@ -55,12 +55,14 @@ if (isset($_POST['submit'])) {
                             <div class="form-group">
                                 <label for="username" class="sr-only">username</label>
                                 <input type="text" name="username" id="username" class="form-control"
-                                       placeholder="Enter Desired Username">
+                                       placeholder="Enter Desired Username" autocomplete="on"
+                                        value="<?= $username ?? '' ?>">
                             </div>
                             <div class="form-group">
                                 <label for="email" class="sr-only">Email</label>
                                 <input type="email" name="email" id="email" class="form-control"
-                                       placeholder="somebody@example.com">
+                                       placeholder="somebody@example.com" autocomplete="on"
+                                       value="<?= $email ?? '' ?>">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="sr-only">Password</label>

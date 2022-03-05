@@ -31,13 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     foreach ($errors as $key => $value) {
         if (empty($value)) {
             unset($errors[$key]);
-//            register_user($username , $email , $password);
-//            login_user($username , $password);
         }
     }
 
     if (empty($errors)) {
         register_user($username, $email, $password);
+        login_user($username , $password);
     }
 }
 ?>

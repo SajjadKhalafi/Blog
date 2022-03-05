@@ -210,8 +210,8 @@ function login_user($username, $password)
         $_SESSION['firstname'] = $db_user_firstname;
         $_SESSION['lastname'] = $db_user_lastname;
         $_SESSION['user_role'] = $db_user_role;
-        header("Location: ../admin");
+        redirect("/cms/admin/");
     } else {
-        header("Location: ../index.php");
+        redirect("/cms/");
     }
 }

@@ -136,16 +136,24 @@ if (isset($_POST['checkboxArray'])) {
 
             <td><a href='post_comments.php?id=<?= $post_id?>'><?= $comments_count?></a></td>
             <td><?= $post_date ?></td>
-            <td><a href='../post.php?p_id=<?= $post_id ?>' class='btn btn-info btn-sm'>View Post</a></td>
-            <td><a href='posts.php?source=edit_post&p_id=<?= $post_id?>' class='btn btn-primary btn-sm'>Edit</a></td>
-            <td><a rel='<?= $post_id?>' href='javascript:void(0)' class='btn btn-danger btn-sm delete_link'>Delete</a></td>
+            <td><a href='../post.php?p_id=<?= $post_id ?>' class='btn btn-primary btn-sm'>View Post</a></td>
+            <td><a href='posts.php?source=edit_post&p_id=<?= $post_id?>' class='btn btn-info btn-sm'>Edit</a></td>
+
+                <form method="post">
+                    <input type="hidden" name="post_id" value="<?= $post_id ?>">
+                    <td><input class="btn btn-danger btn-sm" type="submit" name="delete" value="Delete"> </td>
+
+                </form>
+<!--            <td><a rel='--><?//= $post_id?><!--' href='javascript:void(0)' class='btn btn-danger btn-sm delete_link'>Delete</a></td>-->
+
+
             <td><a href='posts.php?reset=<?= $post_id?>'><?= $post_view_count ?></a></td>
             </tr>
         <?php } ?>
 
         <?php
-        if (isset($_GET['delete'])) {
-            $post_id = escape($_GET['delete']);
+        if (isset($_POST['delete'])) {
+            $post_id = escape($_POST['post_id']);
             $query = "DELETE FROM posts WHERE post_id = $post_id";
             $deletePost = mysqli_query($connection, $query);
             header("Location: posts.php");

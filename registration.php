@@ -2,7 +2,7 @@
 <?php include "includes/header.php"; ?>
 
 <?php
-if (isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
@@ -29,10 +29,15 @@ if (isset($_POST['submit'])) {
         $errors['password'] = 'Password cannot be empty';
 
     foreach ($errors as $key => $value) {
-        if (empty($value)){
+        if (empty($value)) {
+            unset($errors[$key]);
 //            register_user($username , $email , $password);
 //            login_user($username , $password);
         }
+    }
+
+    if (empty($errors)) {
+        register_user($username, $email, $password);
     }
 }
 ?>
@@ -55,7 +60,7 @@ if (isset($_POST['submit'])) {
                                 <label for="username" class="sr-only">username</label>
                                 <input type="text" name="username" id="username" class="form-control"
                                        placeholder="Enter Desired Username" autocomplete="on"
-                                        value="<?= $username ?? '' ?>">
+                                       value="<?= $username ?? '' ?>">
                                 <p style="color: red"><?= $errors['username'] ?? '' ?></p>
                             </div>
                             <div class="form-group">

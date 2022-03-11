@@ -14,8 +14,8 @@
         <div class="col-md-8">
             <?php
             $query = "SELECT * FROM categories WHERE cat_id = $_GET[category]";
-            $cat_query = mysqli_query($connection , $query);
-            while($row = mysqli_fetch_array($cat_query)){
+            $cat_query = mysqli_query($connection, $query);
+            while ($row = mysqli_fetch_array($cat_query)) {
                 $cat_title = $row['cat_title'];
             }
             ?>
@@ -27,10 +27,11 @@
             if (isset($_GET['category'])) {
                 $post_category_id = $_GET['category'];
             }
-            $query = "SELECT * FROM posts ";
-            $query .= "WHERE post_category_id = $post_category_id ";
-            if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin'){
-                $query .= "AND post_status = 'published' ";
+            if (is_admin($_SESSION['username'])) {
+                $stmt1 = mysqli_prepare($connection, "SELECT post_id, post_title , post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ?");
+            }else{
+                $stmt2 = mysqli_prepare($connection, "SELECT post_id, post_title , post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ? AND post_status = ?");
+                $published = 'published';
             }
             $query .= "ORDER BY post_id DESC";
             $select_all_posts_query = mysqli_query($connection, $query);
@@ -52,7 +53,8 @@
                         <a href="post.php?p_id=<?= $post_id ?>"><?= $post_title ?></a>
                     </h2>
                     <p class="lead">
-                        by <a href="author_posts.php?author=<?= $post_user ?>&p_id=<?= $post_id ?>"><?= $post_user ?></a>
+                        by
+                        <a href="author_posts.php?author=<?= $post_user ?>&p_id=<?= $post_id ?>"><?= $post_user ?></a>
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span> Posted on <?= $post_date ?></p>
                     <hr>

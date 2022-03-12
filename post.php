@@ -45,7 +45,7 @@
 
                     <!-- First Blog Post -->
                     <h2>
-                        <a href="post.php?p_id=<?= $post_id ?>"><?= $post_title ?></a>
+                        <a href="<?= $post_id ?>"><?= $post_title ?></a>
                     </h2>
                     <p class="lead">
                         by
@@ -53,7 +53,7 @@
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span> Posted on <?= $post_date ?></p>
                     <hr>
-                    <img class="img-responsive" src="images/<?= $post_image ?>" alt="">
+                    <img class="img-responsive" src="/cms/images/<?= $post_image ?>" alt="">
                     <hr>
                     <p><?= $post_content ?></p>
 

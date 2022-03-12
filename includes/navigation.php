@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.php">CMS</a>
+            <a class="navbar-brand" href="/cms/">CMS</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -42,9 +42,9 @@
                     <li><a href='admin/'>Admin</a></li>
                 <?php endif; ?>
                 <?php if(!isset($_SESSION['username'])): ?>
-                    <li class="<?= $registration_class; ?>"><a href='registration.php'>Registration</a></li>
+                    <li class="<?= $registration_class; ?>"><a href='/cms/registration'>Registration</a></li>
                 <?php endif; ?>
-                <li class="<?= $contact_class; ?>"><a href='contact.php'>Contact</a></li>
+                <li class="<?= $contact_class; ?>"><a href='/cms/contact'>Contact</a></li>
                 <?php
                 if (isset($_SESSION['user_role'])){
                     if (isset($_GET['p_id'])){

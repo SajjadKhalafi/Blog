@@ -58,19 +58,19 @@
 
                     <!-- First Blog Post -->
                     <h2>
-                        <a href="post.php?p_id=<?= $post_id ?>"><?= $post_title ?></a>
+                        <a href="post/<?= $post_id ?>"><?= $post_title ?></a>
                     </h2>
                     <p class="lead">
                         by <a href="author_posts.php?author=<?= $post_user ?>&p_id=<?= $post_id ?>"><?= $post_user ?></a>
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span> Posted on <?= $post_date ?></p>
                     <hr>
-                    <a href="post.php?p_id=<?= $post_id ?>">
+                    <a href="post/<?= $post_id ?>">
                         <img class="img-responsive" src="images/<?= $post_image ?>" alt="">
                     </a>
                     <hr>
                     <p><?= $post_content ?></p><br>
-                    <a class="btn btn-primary" href="post.php?p_id=<?= $post_id ?>">Read More <span
+                    <a class="btn btn-primary" href="post/<?= $post_id ?>">Read More <span
                                 class="glyphicon glyphicon-chevron-right"></span></a>
 
                     <hr>

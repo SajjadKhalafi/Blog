@@ -28,14 +28,23 @@
                 $post_category_id = $_GET['category'];
             }
             if (is_admin($_SESSION['username'])) {
-                $stmt1 = mysqli_prepare($connection, "SELECT post_id, post_title , post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ?");
+                $stmt1 = mysqli_prepare($connection, "SELECT post_id, post_title , post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ? ORDER BY post_id DESC");
             }else{
-                $stmt2 = mysqli_prepare($connection, "SELECT post_id, post_title , post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ? AND post_status = ?");
+                $stmt2 = mysqli_prepare($connection, "SELECT post_id, post_title , post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ? AND post_status = ? ORDER BY post_id DESC");
                 $published = 'published';
             }
-            $query .= "ORDER BY post_id DESC";
-            $select_all_posts_query = mysqli_query($connection, $query);
-            if (mysqli_num_rows($select_all_posts_query) === 0)
+            if (isset($stmt1)){
+                mysqli_stmt_bind_param($stmt1 , "i" , $post_category_id);
+                mysqli_stmt_execute($stmt1);
+                mysqli_stmt_bind_result($stmt1 , $post_id , $post_title , $post_author , $post_date , $post_image , $post_content);
+                $stmt = $stmt1;
+            }else{
+                mysqli_stmt_bind_param($stmt2 , "is" , $post_category_id , $published);
+                mysqli_stmt_execute($stmt2);
+                mysqli_stmt_bind_result($stmt2 , $post_id , $post_title , $post_author , $post_date , $post_image , $post_content);
+                $stmt = $stmt2;
+            }
+            if (mysqli_stmt_num_rows($stmt) < 1)
                 echo "<h1 class='text-center'>No Post Sorry</h1>";
             else {
                 while ($row = mysqli_fetch_assoc($select_all_posts_query)) {

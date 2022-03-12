@@ -20,9 +20,10 @@
         if (isset($_POST['update_category'])){
             $cat_title = escape($_POST['cat_title']);
 
-            $query = "UPDATE categories SET cat_title = '{$cat_title}' WHERE cat_id = {$cat_id}";
-            $select_categories = mysqli_query($connection, $query);
-            header("Location: categories.php");
+            $stmt = mysqli_prepare($connection , "UPDATE categories SET cat_title = ? WHERE cat_id = ?");
+            mysqli_stmt_bind_param($stmt , "si" , $cat_title , $cat_id);
+            mysqli_stmt_execute($stmt);
+            redirect("categories.php");
         }
         ?>
     </div>

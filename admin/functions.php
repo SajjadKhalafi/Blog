@@ -66,6 +66,7 @@ function insert_category()
             if (!$stmt) {
                 die("something wrong!" . mysqli_error($connection));
             }
+            mysqli_stmt_close($stmt);
         }
     }
 }

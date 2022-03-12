@@ -23,6 +23,7 @@
             $stmt = mysqli_prepare($connection , "UPDATE categories SET cat_title = ? WHERE cat_id = ?");
             mysqli_stmt_bind_param($stmt , "si" , $cat_title , $cat_id);
             mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
             redirect("categories.php");
         }
         ?>

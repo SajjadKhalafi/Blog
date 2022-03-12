@@ -27,7 +27,7 @@
             if (isset($_GET['category'])) {
                 $post_category_id = $_GET['category'];
             }
-            if (is_admin($_SESSION['username'])) {
+            if (isset($_SESSION['username']) && is_admin($_SESSION['username'])) {
                 $stmt1 = mysqli_prepare($connection, "SELECT post_id, post_title , post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ? ORDER BY post_id DESC");
             }else{
                 $stmt2 = mysqli_prepare($connection, "SELECT post_id, post_title , post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ? AND post_status = ? ORDER BY post_id DESC");
@@ -46,15 +46,7 @@
             }
             if (mysqli_stmt_num_rows($stmt) < 1)
                 echo "<h1 class='text-center'>No Post Sorry</h1>";
-            else {
-                while ($row = mysqli_fetch_assoc($select_all_posts_query)) {
-                    $post_id = $row['post_id'];
-                    $post_title = $row['post_title'];
-                    $post_user = $row['post_user'];
-                    $post_date = $row['post_date'];
-                    $post_image = $row['post_image'];
-                    $post_content = substr($row['post_content'], 0, 400) . "...";
-                    ?>
+            while (mysqli_stmt_fetch($stmt)): ?>
 
 
                     <!-- First Blog Post -->
@@ -63,7 +55,7 @@
                     </h2>
                     <p class="lead">
                         by
-                        <a href="author_posts.php?author=<?= $post_user ?>&p_id=<?= $post_id ?>"><?= $post_user ?></a>
+                        <a href="author_posts.php?author=<?= $post_author ?>&p_id=<?= $post_id ?>"><?= $post_author ?></a>
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span> Posted on <?= $post_date ?></p>
                     <hr>
@@ -71,16 +63,13 @@
                         <img class="img-responsive" src="images/<?= $post_image ?>" alt="">
                     </a>
                     <hr>
-                    <p><?= $post_content ?></p><br>
+                    <p><?= substr($post_content , 0 , 400) . "..."; ?></p><br>
                     <a class="btn btn-primary" href="post.php?p_id=<?= $post_id ?>">Read More <span
                                 class="glyphicon glyphicon-chevron-right"></span></a>
 
                     <hr>
 
-                    <?php
-                }
-            }
-            ?>
+                    <?php endwhile; ?>
 
         </div>
 

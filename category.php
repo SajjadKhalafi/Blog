@@ -52,7 +52,7 @@
 
                 <!-- First Blog Post -->
                 <h2>
-                    <a href="post.php?p_id=<?= $post_id ?>"><?= $post_title ?></a>
+                    <a href="/cms/post/<?= $post_id ?>"><?= $post_title ?></a>
                 </h2>
                 <p class="lead">
                     by
@@ -60,12 +60,12 @@
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> Posted on <?= $post_date ?></p>
                 <hr>
-                <a href="post.php?p_id=<?= $post_id ?>">
-                    <img class="img-responsive" src="images/<?= $post_image ?>" alt="">
+                <a href="/cms/post/<?= $post_id ?>">
+                    <img class="img-responsive" src="/cms/images/<?= $post_image ?>" alt="">
                 </a>
                 <hr>
                 <p><?= substr($post_content, 0, 400) . "..."; ?></p><br>
-                <a class="btn btn-primary" href="post.php?p_id=<?= $post_id ?>">Read More <span
+                <a class="btn btn-primary" href="/cms/post/<?= $post_id ?>">Read More <span
                             class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>

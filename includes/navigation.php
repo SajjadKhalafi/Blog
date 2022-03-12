@@ -35,11 +35,11 @@
                         $contact_class = 'active';
                     }
 
-                    echo "<li class='$category_class'><a href='category.php?category=$cat_id'>{$cat_title}</a></li>";
+                    echo "<li class='$category_class'><a href='/cms/category/$cat_id'>{$cat_title}</a></li>";
                 }
                 ?>
                 <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'): ?>
-                    <li><a href='admin/'>Admin</a></li>
+                    <li><a href='/cms/admin/'>Admin</a></li>
                 <?php endif; ?>
                 <?php if(!isset($_SESSION['username'])): ?>
                     <li class="<?= $registration_class; ?>"><a href='/cms/registration'>Registration</a></li>
@@ -49,7 +49,7 @@
                 if (isset($_SESSION['user_role'])){
                     if (isset($_GET['p_id'])){
                         $post_id = $_GET['p_id'];
-                        echo "<li><a href='admin/posts.php?source=edit_post&p_id={$post_id}'>Edit Post</a></li>";
+                        echo "<li><a href='/cms/admin/posts.php?source=edit_post&p_id={$post_id}'>Edit Post</a></li>";
                     }
                 }
                 ?>

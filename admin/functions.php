@@ -59,11 +59,11 @@ function insert_category()
         if ($category_title == "" || empty($category_title)) {
             echo "<h5>category title should not be empty</h5>";
         } else {
-            $query = "INSERT INTO categories(`cat_title`) ";
-            $query .= "VALUE('{$category_title}')";
-            $create_category = mysqli_query($connection, $query);
+            $stmt = mysqli_prepare($connection , "INSERT INTO categories(`cat_title`) VALUES (?)");
+            mysqli_stmt_bind_param($stmt , "s" , $category_title);
+            mysqli_stmt_execute($stmt);
             header("Location: categories.php");
-            if (!$create_category) {
+            if (!$stmt) {
                 die("something wrong!" . mysqli_error($connection));
             }
         }

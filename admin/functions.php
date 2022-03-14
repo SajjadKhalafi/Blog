@@ -230,15 +230,17 @@ function login_user($username, $password)
         $db_username = $row['username'];
         $db_user_password = $row['user_password'];
         $db_user_role = $row['user_role'];
-    }
 
-    if ($username === $db_username && password_verify($password, $db_user_password)) {
-        $_SESSION['username'] = $db_username;
-        $_SESSION['firstname'] = $db_user_firstname;
-        $_SESSION['lastname'] = $db_user_lastname;
-        $_SESSION['user_role'] = $db_user_role;
-        redirect("/cms/admin/");
-    } else {
-        redirect("/cms/");
+        if ($username === $db_username && password_verify($password, $db_user_password)) {
+            $_SESSION['username'] = $db_username;
+            $_SESSION['firstname'] = $db_user_firstname;
+            $_SESSION['lastname'] = $db_user_lastname;
+            $_SESSION['user_role'] = $db_user_role;
+            redirect("/cms/admin/");
+        } else {
+            return false;
+        }
     }
+    return true;
+
 }

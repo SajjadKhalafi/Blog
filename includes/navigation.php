@@ -23,6 +23,7 @@
 
                     $category_class = '';
                     $registration_class = '';
+                    $login_class = '';
                     $contact_class = '';
 
                     $pageName = basename($_SERVER['PHP_SELF']);
@@ -31,6 +32,8 @@
                         $category_class = 'active';
                     }elseif ($pageName == 'registration.php'){
                         $registration_class = 'active';
+                    }elseif ($pageName == 'login.php'){
+                        $login_class = 'active';
                     }elseif ($pageName == 'contact.php'){
                         $contact_class = 'active';
                     }
@@ -38,13 +41,14 @@
                     echo "<li class='$category_class'><a href='/cms/category/$cat_id'>{$cat_title}</a></li>";
                 }
                 ?>
-                <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] == 'admin'): ?>
+                <li class="<?= $contact_class; ?>"><a href='/cms/contact'>Contact</a></li>
+                <?php if (isLoggedIn()): ?>
                     <li><a href='/cms/admin/'>Admin</a></li>
-                <?php endif; ?>
-                <?php if(!isset($_SESSION['username'])): ?>
+                    <li><a href='/cms/includes/logout.php'>Logout</a></li>
+                <?php else: ?>
+                    <li class="<?= $login_class; ?>"><a href='/cms/login'>Login</a></li>
                     <li class="<?= $registration_class; ?>"><a href='/cms/registration'>Registration</a></li>
                 <?php endif; ?>
-                <li class="<?= $contact_class; ?>"><a href='/cms/contact'>Contact</a></li>
                 <?php
                 if (isset($_SESSION['user_role'])){
                     if (isset($_GET['p_id'])){

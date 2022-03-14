@@ -22,7 +22,7 @@
     <!-- Login -->
     <div class="well">
         <?php if (!isset($_SESSION['username'])): ?>
-            <form action="includes/login.php" method="post">
+            <form action="/cms/login.php" method="post">
                 <h4>Login</h4>
                 <div class="form-group">
                     <input name="username" type="text" class="form-control" placeholder="Enter Username">

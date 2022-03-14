@@ -1,7 +1,33 @@
 <?php
 function redirect($location)
 {
-    return header("Location: " . $location);
+    header("Location: " . $location);
+    exit;
+}
+
+function ifItIsMethod($method=null)
+{
+    if ($_SERVER["REQUEST_METHOD"] == strtoupper($method)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function isLoggedIn()
+{
+    if (isset($_SESSION['user_role'])){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function checkIfUserLoggedInAndRedirect($redirectLocation=null)
+{
+    if (isLoggedIn()){
+        redirect($redirectLocation);
+    }
 }
 
 function escape($string)
